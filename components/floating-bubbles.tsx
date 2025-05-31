@@ -60,6 +60,36 @@ export default function FloatingBubblesBackground({
 }) {
   const words = title.split(" ")
 
+  // State for user prompt & AI response
+  const [prompt, setPrompt] = useState("")
+  const [montageJSON, setMontageJSON] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  async function handleGenerate() {
+    if (!prompt.trim()) return
+    setLoading(true)
+    setMontageJSON(null)
+    try {
+      const res = await fetch("/api/generate-montage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: prompt }),
+      })
+
+      if (!res.ok) throw new Error(await res.text())
+
+      const data = (await res.json()) as { content: string }
+      setMontageJSON(data.content)
+    } catch (err) {
+      console.error(err)
+      setMontageJSON("Error generating montage. Check console for details.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900">
       <FloatingBubbles />
@@ -95,6 +125,32 @@ export default function FloatingBubblesBackground({
               </span>
             ))}
           </h1>
+
+          {/* User prompt input */}
+          <div className="flex flex-col items-center gap-4 mb-8">
+            <textarea
+              className="w-full max-w-xl p-4 rounded-lg border border-blue-300/50 dark:border-blue-700/50 bg-white/70 dark:bg-black/60 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-md"
+              placeholder="Describe the montage you want..."
+              rows={4}
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+            />
+
+            <Button
+              onClick={handleGenerate}
+              disabled={loading}
+              className="px-6 py-3 font-medium"
+            >
+              {loading ? "Generating..." : "Generate Montage"}
+            </Button>
+          </div>
+
+          {/* Generated JSON output */}
+          {montageJSON && (
+            <pre className="text-left whitespace-pre-wrap bg-black/20 dark:bg-white/10 rounded-lg p-4 overflow-auto max-h-80 text-sm">
+              {montageJSON}
+            </pre>
+          )}
 
           <div
             className="inline-block group relative bg-gradient-to-b from-blue-400/30 to-purple-400/30 
