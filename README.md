@@ -1,2 +1,30 @@
-# veed-genai-hachathon-may2025
-VEED Hackathon https://lu.ma/989p71d2
+# Floating Bubbles
+
+*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/andrea-1387s-projects/v0-floating-bubbles)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/ROp8P9gr8Od)
+
+## Overview
+
+This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+
+## Deployment
+
+Your project is live at:
+
+**[https://vercel.com/andrea-1387s-projects/v0-floating-bubbles](https://vercel.com/andrea-1387s-projects/v0-floating-bubbles)**
+
+## Build your app
+
+Continue building your app on:
+
+**[https://v0.dev/chat/projects/ROp8P9gr8Od](https://v0.dev/chat/projects/ROp8P9gr8Od)**
+
+## How It Works
+
+1. Create and modify your project using [v0.dev](https://v0.dev)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
